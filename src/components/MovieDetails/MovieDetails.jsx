@@ -1,8 +1,6 @@
-// import { Cast } from 'components/Cast/Cast';
-// import { Reviews } from 'components/Reviews/Reviews';
 import { getMovieDetails } from 'components/api/api';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, Outlet, useParams } from 'react-router-dom';
 
 export const MovieDetails = () => {
   const { id } = useParams();
@@ -12,7 +10,6 @@ export const MovieDetails = () => {
     const fetchData = async () => {
       try {
         const data = await getMovieDetails(id);
-        console.log(data);
         setMovieDetail(data);
       } catch (error) {
         console.log(error);
@@ -46,13 +43,13 @@ export const MovieDetails = () => {
               genres.map(({ id, name }) => <li key={id}>{name}</li>)}
           </ul>
         </div>
+        <div>
+          <h2>Additional information</h2>
+          <Link to="cast">Cast</Link>
+          <Link to="reviews">Reviews</Link>
+        </div>
+        <Outlet />
       </div>
     </main>
   );
 };
-
-/* <div>
-      <p>MovieDetails</p>
-      <Cast />
-      <Reviews />
-    </div> */
