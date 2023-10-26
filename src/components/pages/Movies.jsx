@@ -1,11 +1,13 @@
 import { getMoviesByQuery } from 'components/api/api';
 import { useEffect, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 
 export const Movies = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchedMovies, setSearchedMovies] = useState([]);
+  const searchText = searchParams.get('search') ?? '';
+  const location = useLocation();
 
   const handleChange = ({ target }) => {
     setSearchQuery(target.value);
@@ -18,22 +20,19 @@ export const Movies = () => {
   };
 
   useEffect(() => {
-    const searchText = searchParams.get('search');
-
     if (!searchText) return;
 
     const fetchData = async () => {
       try {
         const data = await getMoviesByQuery(searchText);
-
         setSearchedMovies(data.results);
       } catch (error) {
-        console.log(error);
+        alert(error.message);
       }
     };
 
     fetchData();
-  }, [searchParams]);
+  }, [searchText]);
 
   return (
     <main>
@@ -49,12 +48,14 @@ export const Movies = () => {
           searchedMovies.map(({ id, title }) => {
             return (
               <li key={id}>
-                <Link to={`/movies/${id}`}>{title}</Link>
+                <Link to={`/movies/${id}`} state={location}>
+                  {title}
+                </Link>
               </li>
             );
           })
         ) : (
-          <p>Sorry, we couldn't find any movies by requested search query.</p>
+          <p>Please enter a valid search query</p>
         )}
       </ul>
     </main>

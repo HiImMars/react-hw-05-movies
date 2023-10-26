@@ -1,10 +1,11 @@
 import { getMovieDetails } from 'components/api/api';
 import { useEffect, useState } from 'react';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 
 export const MovieDetails = () => {
   const { id } = useParams();
   const [movieDetail, setMovieDetail] = useState({});
+  const location = useLocation();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,9 +24,12 @@ export const MovieDetails = () => {
 
   return (
     <main>
+      <Link to={location.state}>
+        <div>Go back</div>
+      </Link>
       <div>
         <img
-          src={poster_path}
+          src={`https://image.tmdb.org/t/p/w300${poster_path}`}
           width={320}
           height={380}
           loading="lazy"
@@ -39,7 +43,7 @@ export const MovieDetails = () => {
           <h3>Genres</h3>
           <ul>
             {genres &&
-              genres.length &&
+              genres.length > 0 &&
               genres.map(({ id, name }) => <li key={id}>{name}</li>)}
           </ul>
         </div>

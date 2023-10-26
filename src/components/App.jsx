@@ -1,10 +1,20 @@
+import { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
+
 import { Homepage } from './pages/Home';
-import { Movies } from './pages/Movies';
 import { Layout } from './Layout/Layout';
+
+import { Movies } from './pages/Movies';
 import { MovieDetails } from './MovieDetails/MovieDetails';
 import { Cast } from './Cast/Cast';
 import { Reviews } from './Reviews/Reviews';
+
+// NOT WORKING (even with Suspense)
+
+// const Movies = lazy(() => import('./pages/Movies'));
+// const MovieDetails = lazy(() => import('./MovieDetails/MovieDetails'));
+// const Cast = lazy(() => import('./Cast/Cast'));
+// const Reviews = lazy(() => import('./Reviews/Reviews'));
 
 export const App = () => {
   return (
