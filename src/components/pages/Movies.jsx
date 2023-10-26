@@ -1,6 +1,7 @@
 import { getMoviesByQuery } from 'components/api/api';
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import css from './Movies.module.css';
 
 export const Movies = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -36,28 +37,36 @@ export const Movies = () => {
 
   return (
     <main>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Search movies
-          <input type="text" onChange={handleChange} />
-        </label>
-        <button type="submit">Search</button>
-      </form>
-      <ul>
-        {searchedMovies.length > 0 ? (
-          searchedMovies.map(({ id, title }) => {
-            return (
-              <li key={id}>
-                <Link to={`/movies/${id}`} state={location}>
-                  {title}
-                </Link>
-              </li>
-            );
-          })
-        ) : (
-          <p>Please enter a valid search query</p>
-        )}
-      </ul>
+      <div className={css.wrapper}>
+        <form onSubmit={handleSubmit} className={css.form}>
+          <label className={css.label}>
+            Search movies
+            <input type="text" onChange={handleChange} className={css.input} />
+          </label>
+          <button type="submit" className={css.btn}>
+            Search
+          </button>
+        </form>
+        <ul className={css.list}>
+          {searchedMovies.length > 0 ? (
+            searchedMovies.map(({ id, title }) => {
+              return (
+                <li key={id} className={css.item}>
+                  <Link
+                    to={`/movies/${id}`}
+                    state={location}
+                    className={css.link}
+                  >
+                    {title}
+                  </Link>
+                </li>
+              );
+            })
+          ) : (
+            <p className={css.text}>Please enter a valid search query</p>
+          )}
+        </ul>
+      </div>
     </main>
   );
 };

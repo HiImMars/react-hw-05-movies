@@ -1,0 +1,20 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.title {
+  font-size: 24px;
+  color: rgb(255, 127, 127);
+}
+
+.text {
+  font-size: 20px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.textdate {
+  color: rgb(19, 167, 0);
+}

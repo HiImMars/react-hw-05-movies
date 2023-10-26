@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getMovieCast } from 'components/api/api';
+import css from './Cast.module.css';
 
 export const Cast = () => {
   const { id } = useParams();
@@ -21,12 +22,12 @@ export const Cast = () => {
   }, [id]);
 
   return (
-    <ul>
+    <ul className={css.list}>
       {cast &&
         cast.length &&
         cast.map(({ id, profile_path, name, character }) => {
           return (
-            <li key={id}>
+            <li key={id} className={css.item}>
               <img
                 src={
                   profile_path
@@ -34,9 +35,12 @@ export const Cast = () => {
                     : `http://www.suryalaya.org/images/no_image.jpg`
                 }
                 alt={name}
+                className={css.img}
               />
-              <h2>{name}</h2>
-              {character && <p>Character: {character}</p>}
+              <h2 className={css.title}>{name}</h2>
+              {character && (
+                <p className={css.character}>Character: {character}</p>
+              )}
             </li>
           );
         })}

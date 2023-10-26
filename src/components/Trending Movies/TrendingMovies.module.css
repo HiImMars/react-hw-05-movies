@@ -1,0 +1,36 @@
+.title {
+  text-align: center;
+  margin-bottom: 12px;
+  font-size: 40px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+
+  padding: 20px;
+
+  background-color: rgb(33, 33, 33);
+  border-radius: 4px;
+  box-shadow: rgba(59, 0, 0, 0.3) 0px 19px 38px,
+    rgba(59, 0, 0, 0.22) 0px 15px 12px;
+}
+
+.item {
+  font-size: 24px;
+}
+
+.link {
+  color: rgb(221, 221, 221);
+  text-decoration: none;
+
+  transition: color 200ms linear;
+}
+
+.link:hover,
+.link:focus {
+  color: rgb(255, 127, 127);
+}

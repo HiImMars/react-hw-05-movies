@@ -1,6 +1,7 @@
 import { getTrendingMovies } from 'components/api/api';
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import css from './TrendingMovies.module.css';
 
 export const TrendingMovies = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -20,20 +21,24 @@ export const TrendingMovies = () => {
   }, []);
 
   return (
-    <>
-      <h1>Trending Movies</h1>
-      <ul>
+    <div className={css.container}>
+      <h1 className={css.title}>Trending Movies</h1>
+      <ul className={css.list}>
         {trendingMovies.map(
           movie =>
             movie.title && (
-              <li key={movie.id}>
-                <Link to={`/movies/${movie.id}`} state={location}>
+              <li key={movie.id} className={css.item}>
+                <Link
+                  to={`/movies/${movie.id}`}
+                  state={location}
+                  className={css.link}
+                >
                   {movie.title}
                 </Link>
               </li>
             )
         )}
       </ul>
-    </>
+    </div>
   );
 };
